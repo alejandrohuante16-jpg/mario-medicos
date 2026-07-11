@@ -210,11 +210,10 @@
   <header>
     <div class="kicker">MINA · Estrategia Patrimonial</div>
     <h1 class="titulo">Diagnóstico Patrimonial para Profesionales de la Salud</h1>
-    <p class="subtitulo">Dos herramientas de diagnóstico en vivo: cuantifique la fuga fiscal e inflacionaria de su patrimonio.</p>
   </header>
 
   <nav class="tabs">
-    <button class="tab on" data-view="calc"><span class="tab-num">1</span> Calculador de Fuga Fiscal</button>
+    <button class="tab on" data-view="calc"><span class="tab-num">1</span> Calculador de Fuga Patrimonial</button>
     <button class="tab" data-view="check"><span class="tab-num">2</span> Checklist de Blindaje</button>
     <button class="tab" data-view="cuaje"><span class="tab-num">3</span> Su Plan Personalizado</button>
   </nav>
@@ -326,7 +325,7 @@
       </button>
       <button class="modo-btn" id="modo-patrimonial" data-modo="patrimonial">
         <div class="modo-btn-tag">Aportación única</div>
-        <div class="modo-btn-tit">Banca Patrimonial</div>
+        <div class="modo-btn-tit">Segmento Patrimonial</div>
         <div class="modo-btn-sub">Desde $250,000 · crecimiento diversificado</div>
       </button>
     </div>
@@ -403,7 +402,7 @@
               <span class="campo-label">Aportación única</span>
               <span class="campo-val" id="v-cp-monto">$500,000</span>
             </div>
-            <input type="range" id="s-cp-monto" min="250000" max="2000000" step="25000" value="500000">
+            <input type="range" id="s-cp-monto" min="250000" max="10000000" step="25000" value="500000">
             <div class="campo-hint">Mínimo $250,000 · recomendado desde $500,000 para diversificar y acceder al bono.</div>
           </div>
           <div class="campo">
@@ -686,7 +685,7 @@ function calcularPatrimonialCuaje(){
     {serie:sRojo,  color:'#D9480F', w:2.5}
   ], n);
 
-  actualizarResumenHoy(total, `Su capital proyectado en ${n} años invirtiendo ${fmt(monto)} en Banca Patrimonial, en vez de dejarlo estancado.`);
+  actualizarResumenHoy(total, `Su capital proyectado en ${n} años invirtiendo ${fmt(monto)} en el Segmento Patrimonial, en vez de dejarlo estancado.`);
 }
 
 /* Serie de una aportación única que crece a tasa r durante n años */
