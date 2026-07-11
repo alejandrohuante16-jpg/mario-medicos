@@ -92,8 +92,18 @@
   input[type=range]:hover::-webkit-slider-thumb{box-shadow:0 0 0 6px rgba(245,158,11,.22)}
   .campo-hint{font-size:11px;color:var(--muted);margin-top:6px}
 
-  .res-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-  @media(max-width:520px){.res-cards{grid-template-columns:1fr}}
+  .calc-intro{font-size:14px;color:var(--muted);max-width:640px;margin-bottom:18px;font-style:italic}
+
+  .multi-box{background:var(--subsuelo);border-radius:18px;padding:26px 24px;color:#EAF0FF;text-align:center;margin-bottom:18px}
+  .multi-label{font-size:11px;text-transform:uppercase;letter-spacing:.14em;color:var(--oro-luz);font-weight:700;margin-bottom:8px}
+  .multi-num{font-family:"IBM Plex Mono",monospace;font-size:clamp(40px,7vw,64px);font-weight:800;color:#fff;line-height:1}
+  .multi-cap{font-size:13px;color:#C9D6F0;max-width:480px;margin:10px auto 0}
+
+  .res-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+  @media(max-width:760px){.res-cards{grid-template-columns:1fr}}
+  .rcard-neutral{background:linear-gradient(135deg,#F0F3FA,#E4E9F5);border:1px solid rgba(30,42,78,.15)}
+  .rcard-neutral .rcard-label{color:var(--azul)}
+  .rcard-neutral .rcard-num{color:var(--azul)}
   .rcard{border-radius:14px;padding:18px}
   .rcard-fuga{background:linear-gradient(135deg,#FFF1EC,#FFE3D6);border:1px solid rgba(217,72,15,.2)}
   .rcard-opo{background:linear-gradient(135deg,#E9F7F0,#D6F0E3);border:1px solid rgba(31,138,91,.2)}
@@ -123,6 +133,7 @@
 
   /* Checklist */
   .quiz{max-width:760px;margin:0 auto}
+  .quiz-intro{font-size:14px;color:var(--muted);margin-bottom:20px;font-style:italic}
   .q{background:var(--blanco);border:1px solid var(--linea);border-radius:16px;padding:20px 22px;margin-bottom:14px;box-shadow:0 8px 24px rgba(11,21,56,.05)}
   .q-top{display:flex;gap:14px;margin-bottom:16px}
   .q-num{flex:0 0 auto;width:32px;height:32px;border-radius:9px;background:var(--subsuelo);color:var(--oro-luz);display:grid;place-items:center;font-family:"IBM Plex Mono",monospace;font-weight:600;font-size:14px}
@@ -157,6 +168,19 @@
   .resumen-hoy .tit{font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:#9FB2D8;margin-bottom:10px;font-weight:700}
   .resumen-hoy .num{font-family:"IBM Plex Mono",monospace;font-size:clamp(30px,5vw,44px);font-weight:800;color:var(--oro-luz);margin-bottom:8px}
   .resumen-hoy .cap{font-size:13px;color:#C9D6F0;max-width:520px;margin:0 auto 20px}
+
+  .estrategia-box{margin-top:24px}
+  .estrategia-header{margin-bottom:16px}
+  .estrategia-sub{font-size:13px;color:var(--muted);margin-top:8px;max-width:640px}
+  .estrategia-item{background:var(--blanco);border:1px solid var(--linea);border-left-width:4px;border-radius:12px;padding:16px 20px;margin-bottom:12px;box-shadow:0 4px 14px rgba(11,21,56,.05)}
+  .estrategia-item-tit{font-size:13px;font-weight:800;color:var(--texto);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .estrategia-item-txt{font-size:13px;color:var(--muted);line-height:1.65}
+  .estrategia-item-txt b{color:var(--texto)}
+  .est-fiscal{border-left-color:var(--azul)}
+  .est-proteccion{border-left-color:var(--fuga)}
+  .est-sucesion{border-left-color:var(--oro)}
+  .est-liquidez{border-left-color:#60A5FA}
+  .est-complemento{border-left-color:var(--oportunidad)}
 
   .score-box{background:var(--subsuelo);border-radius:20px;padding:32px;color:#EAF0FF;text-align:center;margin-top:24px}
   .score-ring{position:relative;width:200px;height:200px;margin:0 auto 20px}
@@ -220,6 +244,7 @@
 
   <!-- ── VISTA 1: CALCULADOR ── -->
   <section class="view on" id="view-calc">
+    <p class="calc-intro">La mayoría de los médicos nunca ha visto esta comparación con sus propios números. Ajuste sus datos y véalo usted mismo.</p>
     <div class="grid">
       <div class="panel">
         <h2>Sus datos</h2>
@@ -253,16 +278,27 @@
       </div>
 
       <div>
+        <div class="multi-box">
+          <div class="multi-label">Descubrimiento</div>
+          <div class="multi-num">×<span id="r-multi">0</span></div>
+          <div class="multi-cap">Es cuánto se multiplica lo que usted aporta en <span id="multi-anios">20</span> años, solo por dejarlo trabajar de forma eficiente — no por aportar más.</div>
+        </div>
+
         <div class="res-cards">
-          <div class="rcard rcard-fuga">
-            <div class="rcard-label">▼ Costo de la inacción</div>
-            <div class="rcard-num" id="r-fuga">$0</div>
-            <div class="rcard-sub" id="r-fuga-sub">Lo que deja de ganar si su dinero permanece estancado.</div>
+          <div class="rcard rcard-neutral">
+            <div class="rcard-label">● Lo que usted aporta</div>
+            <div class="rcard-num" id="r-aportado">$0</div>
+            <div class="rcard-sub" id="r-aportado-sub">Suma de sus aportaciones, sin rendimientos.</div>
           </div>
           <div class="rcard rcard-opo">
             <div class="rcard-label">▲ Patrimonio potencial</div>
             <div class="rcard-num" id="r-opo">$0</div>
-            <div class="rcard-sub" id="r-opo-sub">Su capital proyectado invirtiendo con nosotros.</div>
+            <div class="rcard-sub" id="r-opo-sub">En lo que se puede convertir si su dinero trabaja de forma eficiente.</div>
+          </div>
+          <div class="rcard rcard-fuga">
+            <div class="rcard-label">▼ Costo de la inacción</div>
+            <div class="rcard-num" id="r-fuga">$0</div>
+            <div class="rcard-sub" id="r-fuga-sub">Lo que deja de ganar si ese mismo dinero permanece estancado.</div>
           </div>
         </div>
 
@@ -276,7 +312,7 @@
           <div class="chart-note" id="chart-note">Proyección a 20 años · pesos nominales</div>
           <svg id="chart" viewBox="0 0 640 300" width="100%" preserveAspectRatio="xMidYMid meet"></svg>
           <div class="leyenda">
-            <span><i class="dot" style="background:#34D399"></i> Invirtiendo con nosotros · 12%</span>
+            <span><i class="dot" style="background:#34D399"></i> Retiro eficiente · 12%</span>
             <span><i class="dot" style="background:#60A5FA"></i> CETES · 6%</span>
             <span><i class="dot" style="background:#D9480F"></i> Banco sin invertir · 0%</span>
           </div>
@@ -290,6 +326,7 @@
   <!-- ── VISTA 2: CHECKLIST ── -->
   <section class="view" id="view-check">
     <div class="quiz">
+      <p class="quiz-intro">Esto es lo que separa un patrimonio protegido de uno expuesto. Responda con honestidad — no hay respuestas incorrectas, solo puntos que conviene resolver.</p>
       <div id="preguntas"></div>
       <div class="score-box" id="score-box" style="display:none">
         <div class="score-ring">
@@ -308,7 +345,7 @@
           <div class="barra"><b style="color:#D9480F" id="b-vuln">0%</b><span>Vulnerable</span></div>
         </div>
         <button class="btn-cta" id="btn-reporte" disabled>
-          Generar Reporte Completo de Soluciones
+          Ver mi Plan Personalizado
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
@@ -452,6 +489,14 @@
       <div class="num" id="resumen-num">$0</div>
       <div class="cap" id="resumen-cap">Esto es lo que su patrimonio puede valer si empieza hoy, en vez de seguir posponiéndolo.</div>
     </div>
+
+    <div class="estrategia-box">
+      <div class="estrategia-header">
+        <div class="kicker">Su estrategia personalizada</div>
+        <p class="estrategia-sub">Con base en su diagnóstico y los datos de su plan, esto es lo que le recomendaríamos como su gestor patrimonial.</p>
+      </div>
+      <div id="estrategia-items"></div>
+    </div>
   </section>
 </div></div>
 
@@ -492,21 +537,29 @@ function calcular(){
 
   const verde = sVerde[n], azul = sAzul[n], rojo = sRojo[n];
   const costoInaccion = verde - rojo;   // lo que deja de ganar por no invertir
+  const totalAportado = aporteAnual * n; // suma nominal de lo aportado, sin rendimientos
+  const multiplicador = totalAportado>0 ? verde/totalAportado : 0;
 
-  el('r-fuga').textContent = fmt(costoInaccion);
-  el('r-fuga-sub').textContent = `Estancado tendría ${fmt(rojo)}; invirtiendo, ${fmt(verde)}.`;
+  el('r-aportado').textContent = fmt(totalAportado);
+  el('r-aportado-sub').textContent = `${fmt(ahorro)}/mes durante ${n} años, sin contar rendimientos.`;
   el('r-opo').textContent  = fmt(verde);
-  el('r-opo-sub').textContent = `Su capital proyectado a ${n} años invirtiendo al 12%.`;
+  el('r-opo-sub').textContent = `En lo que se puede convertir si su dinero trabaja de forma eficiente.`;
+  el('r-fuga').textContent = fmt(costoInaccion);
+  el('r-fuga-sub').textContent = `Estancado tendría ${fmt(rojo)}; eficiente, ${fmt(verde)}.`;
+
+  el('r-multi').textContent = multiplicador.toFixed(1);
+  el('multi-anios').textContent = n;
 
   el('chart-note').textContent = `Proyección a ${n} años · aportando ${fmt(ahorro)}/mes · pesos nominales`;
 
   el('como-cuerpo').innerHTML =
-    `Aporta <b>${fmt(ahorro)}/mes</b> (${fmt(aporteAnual)}/año) durante <b>${n} años</b>. Cada año el saldo crece según el rendimiento anual:<br>` +
+    `Aporta <b>${fmt(ahorro)}/mes</b> (${fmt(aporteAnual)}/año) durante <b>${n} años</b>. En total, usted pone <b>${fmt(totalAportado)}</b> de su bolsillo. Cada año el saldo crece según el rendimiento anual:<br>` +
     `• <b>Banco 0%</b> (dinero estancado): ${fmt(aporteAnual)} × ${n} años = <b>${fmt(rojo)}</b> (solo se acumula lo aportado).<br>` +
     `• <b>CETES 6%</b>: el saldo se reinvierte al 6% anual → <b>${fmt(azul)}</b>.<br>` +
-    `• <b>Con nosotros 12%</b>: el saldo se reinvierte al 12% anual (interés compuesto) → <b>${fmt(verde)}</b>.<br>` +
-    `<b>Costo de la inacción</b> = lo de invertir − lo estancado = ${fmt(verde)} − ${fmt(rojo)} = <b>${fmt(costoInaccion)}</b>.<br>` +
-    `<b>Patrimonio potencial</b> = el capital total invirtiendo al 12% = <b>${fmt(verde)}</b>.`;
+    `• <b>Retiro eficiente 12%</b>: el saldo se reinvierte al 12% anual (interés compuesto) → <b>${fmt(verde)}</b>.<br>` +
+    `<b>Multiplicador</b> = patrimonio potencial ÷ lo aportado = ${fmt(verde)} ÷ ${fmt(totalAportado)} = <b>×${multiplicador.toFixed(1)}</b>.<br>` +
+    `<b>Costo de la inacción</b> = lo eficiente − lo estancado = ${fmt(verde)} − ${fmt(rojo)} = <b>${fmt(costoInaccion)}</b>.<br>` +
+    `<b>Patrimonio potencial</b> = el capital total con retiro eficiente al 12% = <b>${fmt(verde)}</b>.`;
 
   el('supuestos').innerHTML =
     `<b>Supuestos ilustrativos:</b> rendimiento anual — banco sin invertir 0%, CETES 6%, estrategia indexada 12% ` +
@@ -555,7 +608,7 @@ function dibujarChart(containerId, lineas, n){
 const PREGUNTAS = [
   "¿Su patrimonio personal está separado de su patrimonio profesional ante una demanda de responsabilidad civil u otro riesgo operativo?",
   "¿Cuenta con una reserva de liquidez de al menos 6 meses de gasto operativo del consultorio, invertida en instrumentos que protegen contra la inflación (CETES / activos líquidos)?",
-  "¿Su estrategia de ahorro actual aprovecha los estímulos fiscales vigentes (Art. 151/185 LISR) para reducir legalmente su carga de ISR anual?",
+  "¿Actualmente hace algo, de forma legal, para pagar menos impuestos sobre lo que ahorra?",
   "¿Tiene alguna fuente de ingresos pasiva, como fondos indexados, acciones u otra clase de activos?",
   "¿Cuenta con un plan de sucesión (testamento / beneficiarios designados) que evite un juicio sucesorio y proteja a su familia si usted falta?",
   "¿Cuenta con un seguro de vida que incluya cobertura por invalidez, para proteger su ingreso si un accidente o enfermedad le impidiera seguir ejerciendo?",
@@ -612,7 +665,8 @@ function actualizarScore(){
   const todas = contestadas===PREGUNTAS.length;
   const btn = el('btn-reporte');
   btn.disabled = !todas;
-  btn.firstChild.textContent = todas ? 'Generar Reporte Completo de Soluciones ' : `Responda las ${PREGUNTAS.length} preguntas (${contestadas}/${PREGUNTAS.length}) `;
+  btn.firstChild.textContent = todas ? 'Ver mi Plan Personalizado ' : `Responda las ${PREGUNTAS.length} preguntas (${contestadas}/${PREGUNTAS.length}) `;
+  if(typeof generarEstrategia==='function') generarEstrategia();
 }
 
 /* ══════════════ CUAJE — SU PLAN PERSONALIZADO ══════════════ */
@@ -659,6 +713,7 @@ function calcularAhorroCuaje(){
   ], n);
 
   actualizarResumenHoy(totalConBono, `Su patrimonio proyectado en ${n} años aportando ${fmt(aporte)}/mes, incluyendo el bono de fidelidad del ${Math.round(bono*100)}%.`);
+  generarEstrategia();
 }
 
 function calcularPatrimonialCuaje(){
@@ -686,6 +741,7 @@ function calcularPatrimonialCuaje(){
   ], n);
 
   actualizarResumenHoy(total, `Su capital proyectado en ${n} años invirtiendo ${fmt(monto)} en el Segmento Patrimonial, en vez de dejarlo estancado.`);
+  generarEstrategia();
 }
 
 /* Serie de una aportación única que crece a tasa r durante n años */
@@ -698,6 +754,86 @@ function serieLumpSum(monto, r, n){
 function actualizarResumenHoy(total, cap){
   el('resumen-num').textContent = fmt(total);
   el('resumen-cap').textContent = cap;
+}
+
+/* ══════════════ MOTOR DE ESTRATEGIA PERSONALIZADA ══════════════
+   Reglas tipo "gestor patrimonial experimentado": lee las respuestas del
+   Checklist de Blindaje + los datos ya capturados (Calculador y Cuaje) y
+   genera recomendaciones. Es un motor de reglas en el cliente, no una
+   llamada en vivo a un modelo de IA — no hay backend en esta página. */
+function generarEstrategia(){
+  const cont = el('estrategia-items');
+  if(!cont) return;
+  const items = [];
+  const contestadas = respuestas.filter(r=>r!==null).length;
+
+  const ingresoAnual = (+el('s-ingreso').value) * 12;
+  const aporteMensual = +el('s-ca-aporte').value;
+  const aporteAnual = aporteMensual * 12;
+
+  // 1) Fiscal: distribución PPR (Art. 151) vs Art. 93, según si ya aprovecha estímulos (pregunta 3, índice 2)
+  const r3 = respuestas[2];
+  if(r3 === 'no' || r3 === 'ns'){
+    const pprSugerido = aporteAnual * 0.10;
+    const topeLegal = Math.min(ingresoAnual*0.10, 206368); // 10% del ingreso anual, tope 5 UMA
+    const pprFinal = Math.min(pprSugerido, topeLegal);
+    const art93Final = aporteAnual - pprFinal;
+    const capado = pprSugerido > topeLegal;
+    items.push({cls:'est-fiscal', tit:'📋 Distribución fiscal de su Ahorro', txt:
+      `Hoy no está aprovechando ningún estímulo fiscal sobre su ahorro. Con su aportación de <b>${fmt(aporteAnual)}/año</b>, ` +
+      `le recomendamos destinar <b>${fmt(pprFinal)}</b> a <b>OptiMaxx Plus Art. 151 (PPR)</b> — deducible de su base gravable este mismo ejercicio` +
+      (capado ? ` (ajustado al tope legal: 10% de su ingreso anual o $206,368, lo que sea menor)` : '') +
+      ` — y el resto, <b>${fmt(art93Final)}</b>, a <b>Art. 93</b>, que sale 100% libre de impuestos a los 60 años y funciona como instrumento sucesorio.`});
+  }else if(r3==='si'){
+    items.push({cls:'est-fiscal', tit:'📋 Distribución fiscal de su Ahorro', txt:
+      `Ya aprovecha estímulos fiscales sobre su ahorro. Vale la pena confirmar que está usando el <b>tope permitido en Art. 151</b> ` +
+      `(10% de su ingreso anual o $206,368, lo que sea menor) — si no lo ha topado, hay deducción adicional disponible este año.`});
+  }
+
+  // 2) Protección: seguro de vida+invalidez (índice 5) y gastos médicos mayores (índice 6)
+  const sinInvalidez = respuestas[5]==='no' || respuestas[5]==='ns';
+  const sinGmm = respuestas[6]==='no' || respuestas[6]==='ns';
+  if(sinInvalidez || sinGmm){
+    const faltantes = [sinInvalidez?'invalidez':null, sinGmm?'gastos médicos mayores':null].filter(Boolean).join(' y ');
+    items.push({cls:'est-proteccion', tit:'🛡 Protección antes que crecimiento', txt:
+      `No cuenta con cobertura de <b>${faltantes}</b>. Antes de enfocarnos solo en hacer crecer su patrimonio, hay un riesgo que resolver: ` +
+      `un accidente o enfermedad que le impida ejercer sería la mayor amenaza para este mismo plan — su patrimonio depende de que usted pueda seguir trabajando.`});
+  }
+
+  // 3) Sucesión (índice 4)
+  if(respuestas[4]==='no' || respuestas[4]==='ns'){
+    items.push({cls:'est-sucesion', tit:'📜 Sucesión resuelta de forma automática', txt:
+      `No cuenta con un plan de sucesión formal. El vehículo de Ahorro (<b>Art. 93</b>) resuelve esto sin costo adicional: ` +
+      `en caso de fallecimiento, el capital sale <b>libre de impuestos</b> directo a sus beneficiarios designados, sin juicio sucesorio.`});
+  }
+
+  // 4) Liquidez de emergencia (índice 1)
+  if(respuestas[1]==='no' || respuestas[1]==='ns'){
+    items.push({cls:'est-liquidez', tit:'💧 Reserva líquida antes de comprometer capital a largo plazo', txt:
+      `No cuenta con una reserva de liquidez de al menos 6 meses de gasto. Antes de maximizar aportaciones a 25 años, ` +
+      `recomendamos apartar esa reserva en el <b>Segmento Patrimonial (Elite)</b> — conservador, disponible en 24h — y desde ahí construir el resto del plan.`});
+  }
+
+  // 5) Complementariedad Ahorro + Patrimonial (índice 3: ¿ya tiene ingresos/activos pasivos?)
+  if(respuestas[3]==='si'){
+    items.push({cls:'est-complemento', tit:'🔗 Ahorro y Segmento Patrimonial se complementan', txt:
+      `Ya cuenta con activos o ingresos pasivos. Su plan de <b>Ahorro</b> sigue construyendo capital nuevo — es su incubadora — mientras el ` +
+      `<b>Segmento Patrimonial</b> diversifica lo que ya tiene construido. No son alternativas: se refuerzan entre sí.`});
+  }else if(respuestas[3]==='no'){
+    items.push({cls:'est-complemento', tit:'🔗 Primero construir, después diversificar', txt:
+      `Aún no tiene una base de activos diversificada. Recomendamos empezar por el <b>Ahorro</b> como base — su incubadora de patrimonio — ` +
+      `y una vez construido, diversificarlo con el <b>Segmento Patrimonial</b>.`});
+  }
+
+  if(!items.length){
+    cont.innerHTML = `<div class="estrategia-item"><div class="estrategia-item-txt">${contestadas<PREGUNTAS.length ? 'Complete el Checklist de Blindaje para recibir su estrategia personalizada.' : 'Su diagnóstico no arrojó vacíos prioritarios — su plan de Ahorro y Segmento Patrimonial pueden avanzar en paralelo.'}</div></div>`;
+    return;
+  }
+  cont.innerHTML = items.map(i=>`
+    <div class="estrategia-item ${i.cls}">
+      <div class="estrategia-item-tit">${i.tit}</div>
+      <div class="estrategia-item-txt">${i.txt}</div>
+    </div>`).join('');
 }
 
 ['s-ca-aporte','s-ca-plazo'].forEach(id=>{
@@ -728,8 +864,7 @@ calcularAhorroCuaje();
 calcularPatrimonialCuaje();
 
 el('btn-reporte').addEventListener('click',()=>{
-  const pct = Math.round(respuestas.reduce((a,r)=>a+PUNTOS[r],0)/PREGUNTAS.length*100);
-  alert(`Reporte de Salud Patrimonial\n\nScore: ${pct}% protegido / ${100-pct}% vulnerable\n\n(Aquí se generará el reporte completo de soluciones personalizado para el doctor.)`);
+  document.querySelector('[data-view="cuaje"]').click();
 });
 
 /* ── Tabs ── */
