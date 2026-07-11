@@ -244,7 +244,6 @@
 
   <!-- ── VISTA 1: CALCULADOR ── -->
   <section class="view on" id="view-calc">
-    <p class="calc-intro">La mayoría de los médicos nunca ha visto esta comparación con sus propios números. Ajuste sus datos y véalo usted mismo.</p>
     <div class="grid">
       <div class="panel">
         <h2>Sus datos</h2>
@@ -370,26 +369,38 @@
     <!-- Sub-vista AHORRO -->
     <div id="cuaje-ahorro">
       <div class="grid">
-        <div class="panel">
-          <h2>Su plan de ahorro</h2>
-          <div class="campo">
-            <div class="campo-top">
-              <span class="campo-label">Aportación mensual</span>
-              <span class="campo-val" id="v-ca-aporte">$20,000</span>
+        <div>
+          <div class="panel">
+            <h2>Su plan de ahorro</h2>
+            <div class="campo">
+              <div class="campo-top">
+                <span class="campo-label">Aportación mensual</span>
+                <span class="campo-val" id="v-ca-aporte">$20,000</span>
+              </div>
+              <input type="range" id="s-ca-aporte" min="2000" max="25000" step="500" value="20000">
+              <div class="campo-hint" id="h-ca-aporte">Tope de apertura: $25,000/mes.</div>
             </div>
-            <input type="range" id="s-ca-aporte" min="2000" max="25000" step="500" value="20000">
-            <div class="campo-hint" id="h-ca-aporte">Tope de apertura: $25,000/mes.</div>
-          </div>
-          <div class="campo">
-            <div class="campo-top">
-              <span class="campo-label">Plazo del plan</span>
-              <span class="campo-val" id="v-ca-plazo">25 años</span>
+            <div class="campo">
+              <div class="campo-top">
+                <span class="campo-label">Plazo del plan</span>
+                <span class="campo-val" id="v-ca-plazo">25 años</span>
+              </div>
+              <input type="range" id="s-ca-plazo" min="10" max="25" step="1" value="25">
+              <div class="campo-hint">A 25 años se maximiza el bono y permite continuar de forma vitalicia.</div>
             </div>
-            <input type="range" id="s-ca-plazo" min="10" max="25" step="1" value="25">
-            <div class="campo-hint">A 25 años se maximiza el bono y permite continuar de forma vitalicia.</div>
+            <div class="bono-badge">🎁 Bono de fidelidad: <b id="ca-bono-pct">—%</b></div>
+            <div class="campo-hint" id="ca-bono-detalle" style="margin-top:-8px;margin-bottom:16px"></div>
           </div>
-          <div class="bono-badge">🎁 Bono de fidelidad: <b id="ca-bono-pct">—%</b></div>
-          <div class="campo-hint" id="ca-bono-detalle" style="margin-top:-8px;margin-bottom:16px"></div>
+
+          <div class="espera-card">
+            <div class="rcard-label">⏳ Costo de esperar 1 año más para empezar</div>
+            <div class="espera-num" id="ca-espera">$0</div>
+            <div class="rcard-sub">Es lo que deja de acumular, en el mismo horizonte, solo por posponer la decisión 12 meses.</div>
+          </div>
+
+          <div class="nota-fiscal">
+            <b>Beneficio fiscal (Art. 93 LISR):</b> a los 60 años cumplidos y con al menos 5 años en el plan, el retiro es 100% libre de ISR (capital + rendimientos). En caso de fallecimiento, el capital sale libre de impuestos y directo a beneficiarios, sin juicio sucesorio. Rendimiento ilustrativo 12% anual; no constituye garantía.
+          </div>
         </div>
 
         <div>
@@ -415,16 +426,6 @@
               <span><i class="dot" style="background:#60A5FA"></i> Sin bono (solo aportación + 12%)</span>
             </div>
           </div>
-
-          <div class="espera-card">
-            <div class="rcard-label">⏳ Costo de esperar 1 año más para empezar</div>
-            <div class="espera-num" id="ca-espera">$0</div>
-            <div class="rcard-sub">Es lo que deja de acumular, en el mismo horizonte, solo por posponer la decisión 12 meses.</div>
-          </div>
-
-          <div class="nota-fiscal">
-            <b>Beneficio fiscal (Art. 93 LISR):</b> a los 60 años cumplidos y con al menos 5 años en el plan, el retiro es 100% libre de ISR (capital + rendimientos). En caso de fallecimiento, el capital sale libre de impuestos y directo a beneficiarios, sin juicio sucesorio. Rendimiento ilustrativo 12% anual; no constituye garantía.
-          </div>
         </div>
       </div>
     </div>
@@ -432,25 +433,31 @@
     <!-- Sub-vista PATRIMONIAL -->
     <div id="cuaje-patrimonial" style="display:none">
       <div class="grid">
-        <div class="panel">
-          <h2>Su banca patrimonial</h2>
-          <div class="campo">
-            <div class="campo-top">
-              <span class="campo-label">Aportación única</span>
-              <span class="campo-val" id="v-cp-monto">$500,000</span>
+        <div>
+          <div class="panel">
+            <h2>Su segmento patrimonial</h2>
+            <div class="campo">
+              <div class="campo-top">
+                <span class="campo-label">Aportación única</span>
+                <span class="campo-val" id="v-cp-monto">$500,000</span>
+              </div>
+              <input type="range" id="s-cp-monto" min="250000" max="10000000" step="25000" value="500000">
+              <div class="campo-hint">Mínimo $250,000 · recomendado desde $500,000 para diversificar y acceder al bono.</div>
             </div>
-            <input type="range" id="s-cp-monto" min="250000" max="10000000" step="25000" value="500000">
-            <div class="campo-hint">Mínimo $250,000 · recomendado desde $500,000 para diversificar y acceder al bono.</div>
-          </div>
-          <div class="campo">
-            <div class="campo-top">
-              <span class="campo-label">Horizonte de inversión</span>
-              <span class="campo-val" id="v-cp-anios">10 años</span>
+            <div class="campo">
+              <div class="campo-top">
+                <span class="campo-label">Horizonte de inversión</span>
+                <span class="campo-val" id="v-cp-anios">10 años</span>
+              </div>
+              <input type="range" id="s-cp-anios" min="5" max="25" step="1" value="10">
+              <div class="campo-hint">100% líquido a partir del año 5, sin costo.</div>
             </div>
-            <input type="range" id="s-cp-anios" min="5" max="25" step="1" value="10">
-            <div class="campo-hint">100% líquido a partir del año 5, sin costo.</div>
+            <div class="bono-badge" id="cp-bono-badge">🎁 Bono Allianz: <b>7.5%</b> del capital al 5º año</div>
           </div>
-          <div class="bono-badge" id="cp-bono-badge">🎁 Bono Allianz: <b>7.5%</b> del capital al 5º año</div>
+
+          <div class="nota-fiscal">
+            <b>Liquidez:</b> 100% disponible desde el año 5 sin costo; antes del año 5 puede disponer hasta el 90% con un cargo del 1%. <b>Fiscalidad:</b> se aplica una retención del 10% sobre las ganancias al momento de retirar (Art. 129 LISR) — este producto difiere el impuesto mientras está invertido, pero no otorga la exención total que sí tiene el Plan de Ahorro. Diversificación en más de 50 alternativas, incluyendo sectores especializados (IA, semiconductores). Rendimiento ilustrativo 12% anual; no constituye garantía.
+          </div>
         </div>
 
         <div>
@@ -468,17 +475,13 @@
           </div>
 
           <div class="chart-box">
-            <div class="chart-title">Crecimiento de su banca patrimonial</div>
+            <div class="chart-title">Crecimiento de su segmento patrimonial</div>
             <div class="chart-note" id="cp-chart-note">Proyección · pesos nominales</div>
             <svg id="chart-cp" viewBox="0 0 640 300" width="100%" preserveAspectRatio="xMidYMid meet"></svg>
             <div class="leyenda">
-              <span><i class="dot" style="background:#34D399"></i> Con nosotros · 12%</span>
+              <span><i class="dot" style="background:#34D399"></i> Estrategia eficiente · 12%</span>
               <span><i class="dot" style="background:#D9480F"></i> Estancado en banco · 0%</span>
             </div>
-          </div>
-
-          <div class="nota-fiscal">
-            <b>Liquidez:</b> 100% disponible desde el año 5 sin costo; antes del año 5 puede disponer hasta el 90% con un cargo del 1%. <b>Fiscalidad:</b> se aplica una retención del 10% sobre las ganancias al momento de retirar (Art. 129 LISR) — este producto difiere el impuesto mientras está invertido, pero no otorga la exención total que sí tiene el Plan de Ahorro. Diversificación en más de 50 alternativas, incluyendo sectores especializados (IA, semiconductores). Rendimiento ilustrativo 12% anual; no constituye garantía.
           </div>
         </div>
       </div>
@@ -767,27 +770,29 @@ function generarEstrategia(){
   const items = [];
   const contestadas = respuestas.filter(r=>r!==null).length;
 
-  const ingresoAnual = (+el('s-ingreso').value) * 12;
+  // Todos los montos de la estrategia se expresan en mensuales, igual que los sliders.
+  const ingresoMensual = +el('s-ingreso').value;
   const aporteMensual = +el('s-ca-aporte').value;
-  const aporteAnual = aporteMensual * 12;
+  // PPR (Art. 151): el tope máximo deducible es el 10% del ingreso (con tope legal de $206,368/año)
+  const topeDeducibleMensual = Math.min(ingresoMensual*0.10, 206368/12);
+  const pprMensual = Math.min(topeDeducibleMensual, aporteMensual);
+  const art93Mensual = aporteMensual - pprMensual;
+  const fraseInvertido = 'La totalidad de su ahorro mensual se mantiene invertida en todo momento para generarle interés compuesto.';
+  const mostrarSucesion = respuestas[4]==='no' || respuestas[4]==='ns';
 
   // 1) Fiscal: distribución PPR (Art. 151) vs Art. 93, según si ya aprovecha estímulos (pregunta 3, índice 2)
   const r3 = respuestas[2];
   if(r3 === 'no' || r3 === 'ns'){
-    const pprSugerido = aporteAnual * 0.10;
-    const topeLegal = Math.min(ingresoAnual*0.10, 206368); // 10% del ingreso anual, tope 5 UMA
-    const pprFinal = Math.min(pprSugerido, topeLegal);
-    const art93Final = aporteAnual - pprFinal;
-    const capado = pprSugerido > topeLegal;
     items.push({cls:'est-fiscal', tit:'📋 Distribución fiscal de su Ahorro', txt:
-      `Hoy no está aprovechando ningún estímulo fiscal sobre su ahorro. Con su aportación de <b>${fmt(aporteAnual)}/año</b>, ` +
-      `le recomendamos destinar <b>${fmt(pprFinal)}</b> a <b>OptiMaxx Plus Art. 151 (PPR)</b> — deducible de su base gravable este mismo ejercicio` +
-      (capado ? ` (ajustado al tope legal: 10% de su ingreso anual o $206,368, lo que sea menor)` : '') +
-      ` — y el resto, <b>${fmt(art93Final)}</b>, a <b>Art. 93</b>, que sale 100% libre de impuestos a los 60 años y funciona como instrumento sucesorio.`});
+      `Hoy no está aprovechando ningún estímulo fiscal sobre su ahorro. Con su aportación de <b>${fmt(aporteMensual)}/mes</b>, ` +
+      `le recomendamos destinar <b>${fmt(pprMensual)} mensuales</b> — el 10% de su ingreso, el tope máximo que se puede deducir — ` +
+      `a <b>OptiMaxx Plus Art. 151 (PPR)</b>: 100% deducible de su base gravable este mismo ejercicio. ` +
+      (mostrarSucesion ? '' : `El resto, <b>${fmt(art93Mensual)}/mes</b>, se destina a <b>Art. 93</b>: sale 100% libre de impuestos a los 60 años y funciona como cuenta de ahorro flexible. `) +
+      fraseInvertido});
   }else if(r3==='si'){
     items.push({cls:'est-fiscal', tit:'📋 Distribución fiscal de su Ahorro', txt:
-      `Ya aprovecha estímulos fiscales sobre su ahorro. Vale la pena confirmar que está usando el <b>tope permitido en Art. 151</b> ` +
-      `(10% de su ingreso anual o $206,368, lo que sea menor) — si no lo ha topado, hay deducción adicional disponible este año.`});
+      `Ya aprovecha estímulos fiscales sobre su ahorro. Vale la pena confirmar que está deduciendo el <b>tope permitido en Art. 151</b> — ` +
+      `en su caso, <b>${fmt(topeDeducibleMensual)}/mes</b> (el 10% de su ingreso) — si no lo ha topado, hay deducción adicional disponible este año.`});
   }
 
   // 2) Protección: seguro de vida+invalidez (índice 5) y gastos médicos mayores (índice 6)
@@ -800,11 +805,13 @@ function generarEstrategia(){
       `un accidente o enfermedad que le impida ejercer sería la mayor amenaza para este mismo plan — su patrimonio depende de que usted pueda seguir trabajando.`});
   }
 
-  // 3) Sucesión (índice 4)
-  if(respuestas[4]==='no' || respuestas[4]==='ns'){
+  // 3) Sucesión (índice 4) — aquí se detalla la porción Art. 93 del ahorro mensual
+  if(mostrarSucesion){
     items.push({cls:'est-sucesion', tit:'📜 Sucesión resuelta de forma automática', txt:
       `No cuenta con un plan de sucesión formal. El vehículo de Ahorro (<b>Art. 93</b>) resuelve esto sin costo adicional: ` +
-      `en caso de fallecimiento, el capital sale <b>libre de impuestos</b> directo a sus beneficiarios designados, sin juicio sucesorio.`});
+      `en caso de fallecimiento, el capital sale <b>libre de impuestos</b> directo a sus beneficiarios designados, sin juicio sucesorio. ` +
+      `Destinar <b>${fmt(art93Mensual)}/mes</b> a Art. 93: sale 100% libre de impuestos a los 60 años y funciona como instrumento sucesorio ` +
+      `y como cuenta de ahorro flexible. ${fraseInvertido}`});
   }
 
   // 4) Liquidez de emergencia (índice 1)
