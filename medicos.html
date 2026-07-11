@@ -388,12 +388,12 @@
               <input type="range" id="s-ca-plazo" min="10" max="25" step="1" value="25">
               <div class="campo-hint">A 25 años se maximiza el bono y permite continuar de forma vitalicia.</div>
             </div>
-            <div class="bono-badge">🎁 Bono de fidelidad: <b id="ca-bono-pct">—%</b></div>
+            <div class="bono-badge">Bono de fidelidad: <b id="ca-bono-pct">—%</b></div>
             <div class="campo-hint" id="ca-bono-detalle" style="margin-top:-8px;margin-bottom:16px"></div>
           </div>
 
           <div class="espera-card">
-            <div class="rcard-label">⏳ Costo de esperar 1 año más para empezar</div>
+            <div class="rcard-label">◇ Costo de esperar 1 año más para empezar</div>
             <div class="espera-num" id="ca-espera">$0</div>
             <div class="rcard-sub">Es lo que deja de acumular, en el mismo horizonte, solo por posponer la decisión 12 meses.</div>
           </div>
@@ -411,7 +411,7 @@
               <div class="rcard-sub" id="ca-total-sub">Aportaciones + rendimientos + bono de fidelidad.</div>
             </div>
             <div class="rcard rcard-fuga">
-              <div class="rcard-label">🎁 Bono de fidelidad en pesos</div>
+              <div class="rcard-label">Bono de fidelidad en pesos</div>
               <div class="rcard-num" id="ca-bono-monto">$0</div>
               <div class="rcard-sub">Sobre sus primeras 12 aportaciones. Allianz co-invierte desde el mes 1.</div>
             </div>
@@ -452,7 +452,7 @@
               <input type="range" id="s-cp-anios" min="5" max="25" step="1" value="10">
               <div class="campo-hint">100% líquido a partir del año 5, sin costo.</div>
             </div>
-            <div class="bono-badge" id="cp-bono-badge">🎁 Bono Allianz: <b>7.5%</b> del capital al 5º año</div>
+            <div class="bono-badge" id="cp-bono-badge">Bono Allianz: <b>7.5%</b> del capital al 5º año</div>
           </div>
 
           <div class="nota-fiscal">
@@ -468,7 +468,7 @@
               <div class="rcard-sub" id="cp-total-sub">Crecimiento al 12% anual, diversificado en más de 50 alternativas de inversión.</div>
             </div>
             <div class="rcard rcard-fuga">
-              <div class="rcard-label">🎁 Bono de Allianz en pesos</div>
+              <div class="rcard-label">Bono de Allianz en pesos</div>
               <div class="rcard-num" id="cp-bono-monto">$0</div>
               <div class="rcard-sub">Acreditado al cumplir el 5º aniversario, sin haber hecho retiros.</div>
             </div>
@@ -783,14 +783,14 @@ function generarEstrategia(){
   // 1) Fiscal: distribución PPR (Art. 151) vs Art. 93, según si ya aprovecha estímulos (pregunta 3, índice 2)
   const r3 = respuestas[2];
   if(r3 === 'no' || r3 === 'ns'){
-    items.push({cls:'est-fiscal', tit:'📋 Distribución fiscal de su Ahorro', txt:
+    items.push({cls:'est-fiscal', tit:'◆ Distribución fiscal de su Ahorro', txt:
       `Hoy no está aprovechando ningún estímulo fiscal sobre su ahorro. Con su aportación de <b>${fmt(aporteMensual)}/mes</b>, ` +
       `le recomendamos destinar <b>${fmt(pprMensual)} mensuales</b> — el 10% de su ingreso, el tope máximo que se puede deducir — ` +
       `a <b>OptiMaxx Plus Art. 151 (PPR)</b>: 100% deducible de su base gravable este mismo ejercicio. ` +
       (mostrarSucesion ? '' : `El resto, <b>${fmt(art93Mensual)}/mes</b>, se destina a <b>Art. 93</b>: sale 100% libre de impuestos a los 60 años y funciona como cuenta de ahorro flexible. `) +
       fraseInvertido});
   }else if(r3==='si'){
-    items.push({cls:'est-fiscal', tit:'📋 Distribución fiscal de su Ahorro', txt:
+    items.push({cls:'est-fiscal', tit:'◆ Distribución fiscal de su Ahorro', txt:
       `Ya aprovecha estímulos fiscales sobre su ahorro. Vale la pena confirmar que está deduciendo el <b>tope permitido en Art. 151</b> — ` +
       `en su caso, <b>${fmt(topeDeducibleMensual)}/mes</b> (el 10% de su ingreso) — si no lo ha topado, hay deducción adicional disponible este año.`});
   }
@@ -800,14 +800,14 @@ function generarEstrategia(){
   const sinGmm = respuestas[6]==='no' || respuestas[6]==='ns';
   if(sinInvalidez || sinGmm){
     const faltantes = [sinInvalidez?'invalidez':null, sinGmm?'gastos médicos mayores':null].filter(Boolean).join(' y ');
-    items.push({cls:'est-proteccion', tit:'🛡 Protección antes que crecimiento', txt:
+    items.push({cls:'est-proteccion', tit:'◆ Protección antes que crecimiento', txt:
       `No cuenta con cobertura de <b>${faltantes}</b>. Antes de enfocarnos solo en hacer crecer su patrimonio, hay un riesgo que resolver: ` +
       `un accidente o enfermedad que le impida ejercer sería la mayor amenaza para este mismo plan — su patrimonio depende de que usted pueda seguir trabajando.`});
   }
 
   // 3) Sucesión (índice 4) — aquí se detalla la porción Art. 93 del ahorro mensual
   if(mostrarSucesion){
-    items.push({cls:'est-sucesion', tit:'📜 Sucesión resuelta de forma automática', txt:
+    items.push({cls:'est-sucesion', tit:'◆ Sucesión resuelta de forma automática', txt:
       `No cuenta con un plan de sucesión formal. El vehículo de Ahorro (<b>Art. 93</b>) resuelve esto sin costo adicional: ` +
       `en caso de fallecimiento, el capital sale <b>libre de impuestos</b> directo a sus beneficiarios designados, sin juicio sucesorio. ` +
       `Destinar <b>${fmt(art93Mensual)}/mes</b> a Art. 93: sale 100% libre de impuestos a los 60 años y funciona como instrumento sucesorio ` +
@@ -816,18 +816,18 @@ function generarEstrategia(){
 
   // 4) Liquidez de emergencia (índice 1)
   if(respuestas[1]==='no' || respuestas[1]==='ns'){
-    items.push({cls:'est-liquidez', tit:'💧 Reserva líquida antes de comprometer capital a largo plazo', txt:
+    items.push({cls:'est-liquidez', tit:'◆ Reserva líquida antes de comprometer capital a largo plazo', txt:
       `No cuenta con una reserva de liquidez de al menos 6 meses de gasto. Antes de maximizar aportaciones a 25 años, ` +
       `recomendamos apartar esa reserva en el <b>Segmento Patrimonial (Elite)</b> — conservador, disponible en 24h — y desde ahí construir el resto del plan.`});
   }
 
   // 5) Complementariedad Ahorro + Patrimonial (índice 3: ¿ya tiene ingresos/activos pasivos?)
   if(respuestas[3]==='si'){
-    items.push({cls:'est-complemento', tit:'🔗 Ahorro y Segmento Patrimonial se complementan', txt:
+    items.push({cls:'est-complemento', tit:'◆ Ahorro y Segmento Patrimonial se complementan', txt:
       `Ya cuenta con activos o ingresos pasivos. Su plan de <b>Ahorro</b> sigue construyendo capital nuevo — es su incubadora — mientras el ` +
       `<b>Segmento Patrimonial</b> diversifica lo que ya tiene construido. No son alternativas: se refuerzan entre sí.`});
   }else if(respuestas[3]==='no'){
-    items.push({cls:'est-complemento', tit:'🔗 Primero construir, después diversificar', txt:
+    items.push({cls:'est-complemento', tit:'◆ Primero construir, después diversificar', txt:
       `Aún no tiene una base de activos diversificada. Recomendamos empezar por el <b>Ahorro</b> como base — su incubadora de patrimonio — ` +
       `y una vez construido, diversificarlo con el <b>Segmento Patrimonial</b>.`});
   }
@@ -882,9 +882,13 @@ document.querySelectorAll('.tab').forEach(t=>{
     t.classList.add('on');
     el('view-'+t.dataset.view).classList.add('on');
     if(t.dataset.view==='cuaje'){
-      // Hereda el ahorro mensual ya capturado en el Calculador — no se le vuelve a preguntar
+      // Hereda los datos ya capturados en el Calculador — no se le vuelve a preguntar
       const ahorroPrevio = Math.min(25000, +el('s-ahorro').value);
       el('s-ca-aporte').value = ahorroPrevio;
+      // Hereda también el horizonte, clampeado al rango del plan de Ahorro (10–25 años)
+      const plazoPrevio = Math.min(25, Math.max(10, +el('s-anios').value));
+      el('s-ca-plazo').value = plazoPrevio;
+      el('s-ca-plazo').dispatchEvent(new Event('input'));
       el('s-ca-aporte').dispatchEvent(new Event('input'));
     }
   });
