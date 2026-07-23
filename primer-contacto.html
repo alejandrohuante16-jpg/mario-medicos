@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0B1538">
+<title>Gestión patrimonial para médicos — MINA</title>
+<style>
+  :root{
+    --subsuelo:#0B1538; --subsuelo-2:#080F2A; --panel:#101C46;
+    --line:rgba(239,235,226,.12); --texto:#E9E5DA; --muted:#9AA3C0; --muted-2:#6E769A;
+    --oro:#F2A024; --oro-l:#FBBF24; --papel:#EFEBE2;
+    --font:'Manrope','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --mono:'IBM Plex Mono','SF Mono',ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:var(--font); color:var(--texto);
+    background:
+      radial-gradient(900px 520px at 82% -8%, #16265e 0%, rgba(22,38,94,0) 62%),
+      linear-gradient(180deg,var(--subsuelo) 0%, var(--subsuelo-2) 100%);
+    -webkit-font-smoothing:antialiased; line-height:1.5; min-height:100vh;
+  }
+  .wrap{max-width:640px; margin:0 auto; padding:26px 22px 40px}
+  .top{display:flex;align-items:center;gap:10px;padding-bottom:34px}
+  .top .dia{width:11px;height:11px;background:var(--oro);transform:rotate(45deg);flex:none}
+  .top .m{font-weight:800;font-size:19px;letter-spacing:4px}
+  .top .t{font-family:var(--mono);font-size:9px;letter-spacing:2px;color:var(--muted-2);text-transform:uppercase;border-left:1px solid var(--line);padding-left:10px;line-height:1.3}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;color:var(--oro);font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:16px}
+  .eyebrow::before{content:"";width:7px;height:7px;background:var(--oro);transform:rotate(45deg);flex:none}
+  h1{font-size:clamp(29px,6.6vw,40px);line-height:1.15;font-weight:800;letter-spacing:-.5px;color:#fff}
+  h1 em{font-style:normal;color:var(--oro)}
+  .lead{margin-top:16px;font-size:16px;color:var(--muted)}
+  .para-quien{margin-top:20px;font-family:var(--mono);font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:var(--muted-2)}
+  .para-quien b{color:var(--texto)}
+  .insight{margin-top:22px;padding:16px 18px;border-left:3px solid var(--oro);background:rgba(242,160,36,.06);border-radius:0 12px 12px 0}
+  .insight p{font-size:15.5px;color:var(--texto);line-height:1.5}
+  .insight b{color:#fff}
+
+  /* Visual */
+  .visual{margin-top:30px;padding:20px 20px 16px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+  .visual svg{width:100%;height:auto;display:block}
+  .visual .cap{margin-top:14px;font-size:14px;color:var(--muted);text-align:center}
+  .visual .cap b{color:#fff}
+
+  /* Pilares */
+  .pillars{margin-top:26px;display:flex;flex-direction:column;gap:12px}
+  .pillar{display:flex;flex-direction:column;align-items:center;text-align:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 20px}
+  .pillar__icon{flex:none;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:rgba(242,160,36,.12)}
+  .pillar__icon svg{width:22px;height:22px;fill:none;stroke:var(--oro);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .pillar h3{font-size:17px;color:#fff;margin-bottom:4px}
+  .pillar p{font-size:14px;color:var(--muted)}
+
+  .who{margin-top:30px;padding:20px 22px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.02)}
+  .who .eyebrow{margin-bottom:11px}
+  .who p{font-size:14.5px;color:var(--muted)}
+  .who b{color:var(--texto)}
+
+  .cta{margin-top:32px;text-align:center;padding:34px 22px;background:var(--panel);border:1px solid var(--line);border-radius:16px}
+  .cta h2{font-size:clamp(22px,5vw,27px);color:#fff;font-weight:800;letter-spacing:-.3px;max-width:20ch;margin:0 auto}
+  .cta .sub{margin-top:11px;color:var(--muted);font-size:14px}
+  .cta-btn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;padding:15px 28px;border-radius:12px;
+    background:var(--oro);color:var(--subsuelo-2);font-weight:800;font-size:16px;text-decoration:none;transition:.15s}
+  .cta-btn:hover{background:var(--oro-l)}
+  .cta-btn svg{width:19px;height:19px;fill:none;stroke:var(--subsuelo-2);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .cta .fine{margin-top:13px;font-size:12px;color:var(--muted-2)}
+
+  .foot{margin-top:32px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px;color:var(--muted-2);font-size:12px;flex-wrap:wrap}
+  .foot .mono{font-family:var(--mono);letter-spacing:1px}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="top"><span class="dia"></span><span class="m">MINA</span><span class="t">Gestión<br>Patrimonial</span></header>
+
+    <div class="eyebrow">Estrategia patrimonial para médicos</div>
+    <h1>Su profesión es su mayor activo. <em>Protejámoslo y hagámoslo crecer.</em></h1>
+    <div class="insight"><p>El mundo cambia rápido: impuestos, mercados, imprevistos. La tranquilidad no se improvisa — <b>se diseña con estrategia</b>, antes de necesitarla.</p></div>
+    <p class="lead">Una conversación breve, sin compromiso, para darle tranquilidad hoy y opciones mañana.</p>
+    <p class="para-quien">Para médicos en cualquier etapa de su carrera.</p>
+
+    <section class="visual">
+      <svg viewBox="0 0 320 132" role="img" aria-label="Lo que empieza hoy crece con el tiempo">
+        <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#F2A024" stop-opacity=".34"/><stop offset="1" stop-color="#F2A024" stop-opacity="0"/>
+        </linearGradient></defs>
+        <line x1="20" y1="108" x2="308" y2="108" stroke="#1c2860"/>
+        <path d="M20,104 C90,100 130,86 180,62 S262,22 304,14 L304,108 L20,108 Z" fill="url(#g)"/>
+        <path d="M20,104 C90,100 130,86 180,62 S262,22 304,14" fill="none" stroke="#F2A024" stroke-width="2.4" stroke-linecap="round"/>
+        <circle cx="304" cy="14" r="4" fill="#F2A024"/>
+        <text x="20" y="124" fill="#6E769A" font-family="'IBM Plex Mono',monospace" font-size="10">Hoy</text>
+        <text x="304" y="124" fill="#6E769A" font-family="'IBM Plex Mono',monospace" font-size="10" text-anchor="end">Con el tiempo</text>
+      </svg>
+      <p class="cap">No se trata de cuánto tiene hoy. <b>Se trata de empezar</b> y dejar que el tiempo trabaje a su favor.</p>
+    </section>
+
+    <section class="pillars">
+      <article class="pillar">
+        <span class="pillar__icon"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.6-3.1 7.7-7 9-3.9-1.3-7-4.4-7-9V6l7-3z"/><path d="M9.5 12l1.8 1.8L15 10"/></svg></span>
+        <div><h3>Tranquilidad para su familia</h3><p>Un respaldo que los sostenga si algún día, por salud, tuviera que hacer una pausa.</p></div>
+      </article>
+      <article class="pillar">
+        <span class="pillar__icon"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>
+        <div><h3>Su patrimonio, ordenado y protegido</h3><p>Claridad fiscal, legal y para heredar. Con reglas por escrito, sin sorpresas.</p></div>
+      </article>
+      <article class="pillar">
+        <span class="pillar__icon"><svg viewBox="0 0 24 24"><polyline points="4 16 10 10 13 13 20 5"/><polyline points="15 5 20 5 20 10"/></svg></span>
+        <div><h3>Libertad para decidir</h3><p>Que su dinero trabaje y le dé opciones: elegir cuánto y cómo trabajar, en sus términos.</p></div>
+      </article>
+    </section>
+
+    <section class="who">
+      <div class="eyebrow">Quiénes estamos detrás</div>
+      <p>En <b>MINA</b> trabajamos en equipo: <b>Alejandro Huante</b>, en estrategia y análisis patrimonial, y <b>Mario Altamirano</b>, asesor patrimonial autorizado por Allianz. Unimos estrategia y asesoría para que cada decisión sobre su patrimonio esté bien pensada — con un enfoque claro y sin presión.</p>
+    </section>
+
+    <section class="cta">
+      <h2>Conversémoslo, sin compromiso.</h2>
+      <p class="sub">Quince minutos. Usted decide si tiene sentido continuar.</p>
+      <a class="cta-btn" id="agendaBtn" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="16" rx="2"/><path d="M3.5 9h17"/><path d="M8 3v4M16 3v4"/></svg>
+        Agendar una conversación
+      </a>
+      <p class="fine">Elija el horario que mejor le acomode.</p>
+    </section>
+
+    <footer class="foot"><span><span style="display:inline-block;width:8px;height:8px;background:var(--oro);transform:rotate(45deg);margin-right:7px"></span>MINA · Gestión Patrimonial</span><span class="mono">Allianz · Consultoría Autorizada</span></footer>
+  </div>
+
+<script>
+  // Configuración — editar para cada asesor / campaña.
+  const CFG = {
+    agenda: 'https://calendar.app.google/xSZLcxh7KRXe7u3p7' // link de agenda de Mario
+  };
+  document.getElementById('agendaBtn').href = CFG.agenda;
+  // Personalización opcional en frío: ?para=Dr.%20Apellido
+  const para = new URLSearchParams(location.search).get('para');
+  if (para) document.querySelector('.para-quien').innerHTML = `Preparado para <b>${para.replace(/[<>]/g, '')}</b>`;
+</script>
+</body>
+</html>
